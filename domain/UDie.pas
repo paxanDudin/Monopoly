@@ -10,20 +10,27 @@ type
   private
     faceValue: integer;
   public
-    procedure Die;
+    //procedure Die;
     procedure roll;
     function getFaceValue: integer;
+  published
+    constructor create;
   end;
 
 implementation
 
 { TDie }
 
+constructor TDie.create;
+begin
+  roll;
+end;
+    {
 procedure TDie.Die;
 begin
   roll;
 end;
-
+   }
 function TDie.getFaceValue: integer;
 begin
   result := faceValue;

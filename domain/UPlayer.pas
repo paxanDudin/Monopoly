@@ -12,16 +12,20 @@ type
     piece: TPiece;
     board: TBoard;
     dice: TDie;
+  published
+    constructor create(name: string; dice: TDie; board: TBoard);
   public
-    procedure Player(name: string; dice: TDie; board: TBoard);
+    //procedure Player(name: string; dice: TDie; board: TBoard);
     procedure takeTurn;
+    function GetLocation: TSquare;
+    function getName: string;
   end;
 
 implementation
 
 { TPlayer }
 
-procedure TPlayer.Player(name: string; dice: TDie; board: TBoard);
+constructor TPlayer.create(name: string; dice: TDie; board: TBoard);
 begin
   self.name := name;
   self.dice := dice;
@@ -29,6 +33,24 @@ begin
   piece:= TPiece.Create(board.getStartSquare);
 end;
 
+function TPlayer.GetLocation: TSquare;
+begin
+  result := piece.getLocation;
+end;
+
+function TPlayer.getName: string;
+begin
+  result := name;
+end;
+ {
+procedure TPlayer.Player(name: string; dice: TDie; board: TBoard);
+begin
+  self.name := name;
+  self.dice := dice;
+  self.board := board;
+  piece:= TPiece.Create(board.getStartSquare);
+end;
+}
 procedure TPlayer.takeTurn;
 var
   rollTotal, i: integer;

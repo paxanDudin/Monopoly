@@ -9,22 +9,23 @@ type
     nextSquare: TSquare;
     index: integer;
   public
-    procedure Square(name: string; index: integer);
+    //procedure Square(name: string; index: integer);
     procedure setNextSquare(s: TSquare);
     function getnextSquare: TSquare;
     function getName: string;
     function getIndex: integer;
   published
-    constructor create(nmaeSquare: string; numberSquare: integer);
+    constructor create(nameSquare: string; numberSquare: integer);
   end;
 
 implementation
 
 { TSquere }
 
-constructor TSquare.create(nmaeSquare: string; numberSquare: integer);
+constructor TSquare.create(nameSquare: string; numberSquare: integer);
 begin
-  //
+  self.name := nameSquare;
+  self.index := numberSquare;
 end;
 
 function TSquare.getIndex: integer;
@@ -46,11 +47,11 @@ procedure TSquare.setNextSquare(s: TSquare);
 begin
   nextSquare := s;
 end;
-
+ {
 procedure TSquare.Square(name: string; index: integer);
 begin
   self.name := name;
   self.index := index;
 end;
-
+}
 end.

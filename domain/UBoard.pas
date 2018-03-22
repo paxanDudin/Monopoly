@@ -3,7 +3,7 @@ unit UBoard;
 interface
 
 Uses
-  SysUtils, Classes,
+  SysUtils, Classes, Generics.Collections, Generics.Defaults,
   USquare;
 
 type
@@ -11,42 +11,42 @@ type
   const
     SIZE = 40;
   private
-    squares: TList;
+    squares: TList<TSquare>;
     procedure build(i: integer);
     procedure linkSquares;
     procedure link(i: integer);
   public
-    procedure Board;
+    // procedure Board;
     function getSquare(start: TSquare; distance: integer): TSquare;
     function getStartSquare: TSquare;
-    procedure buildSuares;
-
+    procedure buildSquares;
+  published
+    constructor create;
   end;
 
 implementation
-
-{ TBoard }
-
-procedure TBoard.Board;
-begin
-  // buildSqueres;
-  // linkSqueres;
-end;
 
 procedure TBoard.build(i: integer);
 var
   s: TSquare;
 begin
-  s := TSquare.Create('Square ' + inttostr(i), i - 1);
-  squares.Insert(i, s);
+  s := TSquare.create('Square ' + inttostr(i), i - 1);
+  squares.Add(s);
 end;
 
-procedure TBoard.buildSuares;
+procedure TBoard.buildSquares;
 var
   i: integer;
 begin
   for i := 1 to SIZE do
     build(i);
+end;
+
+constructor TBoard.create;
+begin
+  squares := TList<TSquare>.create;
+  buildSquares;
+  linkSquares;
 end;
 
 function TBoard.getSquare(start: TSquare; distance: integer): TSquare;
