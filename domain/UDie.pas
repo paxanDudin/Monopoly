@@ -6,7 +6,7 @@ type
 
   TDie = class
   const
-    MAX=6;
+    MAX = 6;
   private
     faceValue: integer;
   public
