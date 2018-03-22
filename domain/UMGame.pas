@@ -31,10 +31,9 @@ constructor TMGame.create;
 var
   p: TPlayer;
 begin
-
-  dice:= TDie.create;
-  players:= TList<TPlayer>.create;
-  board:= TBoard.create;
+  dice := TDie.create;
+  players := TList<TPlayer>.create;
+  board := TBoard.create;
   p := TPlayer.create('Лошадь', dice, board);
   players.Add(p);
   p := TPlayer.create('Автомобиль', dice, board);

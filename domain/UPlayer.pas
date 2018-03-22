@@ -3,7 +3,8 @@ unit UPlayer;
 interface
 
 uses
-UPiece, UBoard, UDie, USquare;
+  SysUtils, Classes, Generics.Collections, Generics.Defaults,
+  UPiece, UBoard, UDie, USquare;
 
 type
   TPlayer = class
@@ -11,11 +12,10 @@ type
     name: string;
     piece: TPiece;
     board: TBoard;
-    dice: TDie;
+    dice: TList<TDie>;
   published
     constructor create(name: string; dice: TDie; board: TBoard);
   public
-    //procedure Player(name: string; dice: TDie; board: TBoard);
     procedure takeTurn;
     function GetLocation: TSquare;
     function getName: string;
@@ -28,29 +28,24 @@ implementation
 constructor TPlayer.create(name: string; dice: TDie; board: TBoard);
 begin
   self.name := name;
-  self.dice := dice;
+  //self.dice := dice;
+  self.dice := TList<TDie>.create;
+  self.dice.Add(dice);
+  self.dice.Add(dice);
   self.board := board;
-  piece:= TPiece.Create(board.getStartSquare);
+  piece := TPiece.create(board.getStartSquare);
 end;
 
 function TPlayer.GetLocation: TSquare;
 begin
-  result := piece.getLocation;
+  result := piece.GetLocation;
 end;
 
 function TPlayer.getName: string;
 begin
   result := name;
 end;
- {
-procedure TPlayer.Player(name: string; dice: TDie; board: TBoard);
-begin
-  self.name := name;
-  self.dice := dice;
-  self.board := board;
-  piece:= TPiece.Create(board.getStartSquare);
-end;
-}
+
 procedure TPlayer.takeTurn;
 var
   rollTotal, i: integer;
@@ -58,11 +53,12 @@ var
 begin
   // бросание кубиков
   rollTotal := 0;
-  for i := 0 to dice.MAX do begin   // MAX -> length = 2
-    dice.roll;  // for dice[i]
-    rollTotal := rollTotal + dice.getFaceValue;
+  for i := 0 to dice.Count-1 do
+  begin // length = 2
+    dice.Items[i].roll;
+    rollTotal := rollTotal + self.dice.Items[i].getFaceValue;
   end;
-  newLoc := board.getSquare(piece.getLocation,rollTotal);
+  newLoc := board.getSquare(piece.GetLocation, rollTotal);
   piece.setLocation(newLoc);
 end;
 
