@@ -18,7 +18,6 @@ type
     procedure Button1Click(Sender: TObject);
   private
     MGame: TMGame;
-    Panels: TList<TPanel>;
   public
     { Public declarations }
   end;
@@ -38,9 +37,6 @@ begin
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
-var
-  i: integer;
-  Panel: TPanel;
 begin
   MGame := TMGame.create;
 end;
