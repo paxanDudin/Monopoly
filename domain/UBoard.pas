@@ -38,7 +38,7 @@ var
   i: integer;
 begin
   squares := TList<TSquare>.create;
-  for i := 0 to SIZE-1 do
+  for i := 0 to SIZE - 1 do
     build(i);
 end;
 
@@ -52,7 +52,7 @@ function TBoard.getSquare(start: TSquare; distance: integer): TSquare;
 var
   endIndex: integer;
 begin
-  endIndex := (start.getIndex + distance);
+  endIndex := ((start.getIndex + distance + 1) mod 40) - 1;
   result := squares.Items[endIndex];
 end;
 
@@ -65,21 +65,25 @@ procedure TBoard.link(i: integer);
 var
   next, current: TSquare;
 begin
-  current := squares.Items[i];
-  next := squares.Items[i];   // i + 1   ??? здесь не работает
-  current.setNextSquare(next);
+  {
+    current := squares.Items[i];
+    next := squares.Items[i]; // i + 1   ??? здесь не работает
+    current.setNextSquare(next);
+  }
 end;
 
 procedure TBoard.linkSquares;
 var
   i: integer;
-  first, last: TSquare;
+  First, last: TSquare;
 begin
-  for i := 0 to (SIZE - 1) do
+  {
+    for i := 0 to (SIZE-1) do
     link(i);
-  first := squares.First;
-  last := squares.Last;
-  last.setNextSquare(first);
+    first := squares.First;
+    last := squares.Last;
+    last.setNextSquare(first);
+  }
 end;
 
 end.
