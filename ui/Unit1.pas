@@ -26,6 +26,12 @@ type
     Image10: TImage;
     Image11: TImage;
     Image12: TImage;
+    Image13: TImage;
+    Image14: TImage;
+    Image15: TImage;
+    Image16: TImage;
+    Image17: TImage;
+    Image18: TImage;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
   private
